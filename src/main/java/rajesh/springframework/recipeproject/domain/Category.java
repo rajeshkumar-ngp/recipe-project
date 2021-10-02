@@ -1,17 +1,18 @@
 package rajesh.springframework.recipeproject.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-public class Notes {
+public class Category {
 
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private Long id;
-
-    @OneToOne
-    private Recipe recipe;
     private String description;
+
+    @ManyToMany(mappedBy = "categories")
+    private Set<Recipe> recipes;
 
     public Long getId() {
         return id;
@@ -21,19 +22,19 @@ public class Notes {
         this.id = id;
     }
 
-    public Recipe getRecipe() {
-        return recipe;
-    }
-
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(Set<Recipe> recipes) {
+        this.recipes = recipes;
     }
 }
